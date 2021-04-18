@@ -87,5 +87,16 @@ namespace Proba
                 Autos[i].Price = price;
             }
         }
+
+        static private void Sort()
+        {
+            // сортировка по убыванию (название + цена) название приоритетнее: если названия одинаковые, то по цене
+            Autos = Autos.AsQueryable<Autos>().OrderByDescending(a => a.Name).ThenByDescending(a => a.Price).ToArray();
+
+            //сортировка по возрастанию (название + цена) название приоритетнее: если названия одинаковые, то по цене
+            Autos = Autos.AsQueryable<Autos>().OrderBy(a => a.Name).ThenBy(a => a.Price).ToArray();
+
+            Console.WriteLine("Отсортировано!");
+        }
     }
 }
