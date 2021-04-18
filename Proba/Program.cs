@@ -19,24 +19,24 @@ namespace Proba
                 Console.Write("Введите размер массива: ");
                 string n1 = Console.ReadLine();
 
-                while(!Int32.TryParse(n1, out n)) // проверка на введенное целое число
+                while (!Int32.TryParse(n1, out n)) // проверка на введенное целое число
                 {
                     Console.WriteLine("Введите целое число!");
                     Console.Write("Введите размер массива: ");
                     n1 = Console.ReadLine();
+                    Console.WriteLine();
                 }
 
                 Autos = new Autos[n]; // создали массив с n элементами
                 ReadAutos();
                 Sort();
-
-
-
+                Save();
                 Console.ReadKey();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
+                Console.ReadKey();
             }
         }
 
@@ -83,6 +83,7 @@ namespace Proba
                     Console.WriteLine("Введите целое число!");
                     Console.Write("Введите размер массива: ");
                     price1 = Console.ReadLine();
+                    Console.WriteLine();
                 }
 
                 Autos[i].Price = price;
@@ -91,8 +92,8 @@ namespace Proba
 
         static public void Sort()
         {
-            // сортировка по убыванию (название + цена) название приоритетнее: если названия одинаковые, то по цене
-            Autos = Autos.AsQueryable<Autos>().OrderByDescending(a => a.Name).ThenByDescending(a => a.Price).ToArray();
+            //// сортировка по убыванию (название + цена) название приоритетнее: если названия одинаковые, то по цене
+            //Autos = Autos.AsQueryable<Autos>().OrderByDescending(a => a.Name).ThenByDescending(a => a.Price).ToArray();
 
             //сортировка по возрастанию (название + цена) название приоритетнее: если названия одинаковые, то по цене
             Autos = Autos.AsQueryable<Autos>().OrderBy(a => a.Name).ThenBy(a => a.Price).ToArray();
@@ -100,9 +101,9 @@ namespace Proba
             Console.WriteLine("Отсортировано!");
         }
 
-        static public void Save()
+        static public void Save() // метод для записи в файл
         {
-            using (StreamWriter stream = new StreamWriter("file.txt"))
+            using (StreamWriter stream = new StreamWriter("C:/proba/file.txt"))
             {
                 foreach (Autos autos in Autos)
                 {
