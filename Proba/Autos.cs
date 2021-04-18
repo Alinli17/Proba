@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace Proba
 {
-    class Program
+    class Autos
     {
-        static void Main(string[] args)
-        {
-
-        }
     }
 }
