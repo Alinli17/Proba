@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO; // для работы с текстовым документом
 
 namespace Proba
 {
@@ -27,7 +28,7 @@ namespace Proba
 
                 Autos = new Autos[n]; // создали массив с n элементами
                 ReadAutos();
-
+                Sort();
 
 
 
@@ -39,7 +40,7 @@ namespace Proba
             }
         }
 
-        static private void ReadAutos()
+        static public void ReadAutos()
         {
             for (int i = 0;  i < n; i++)
             {
@@ -88,7 +89,7 @@ namespace Proba
             }
         }
 
-        static private void Sort()
+        static public void Sort()
         {
             // сортировка по убыванию (название + цена) название приоритетнее: если названия одинаковые, то по цене
             Autos = Autos.AsQueryable<Autos>().OrderByDescending(a => a.Name).ThenByDescending(a => a.Price).ToArray();
@@ -97,6 +98,18 @@ namespace Proba
             Autos = Autos.AsQueryable<Autos>().OrderBy(a => a.Name).ThenBy(a => a.Price).ToArray();
 
             Console.WriteLine("Отсортировано!");
+        }
+
+        static public void Save()
+        {
+            using (StreamWriter stream = new StreamWriter("file.txt"))
+            {
+                foreach (Autos autos in Autos)
+                {
+                    stream.WriteLine(autos.Name + "; " + autos.Model + "; " + autos.Price + ".");
+                }
+                Console.WriteLine("Сохранение прошло успешно!");
+            }
         }
     }
 }
